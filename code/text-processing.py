@@ -1,9 +1,10 @@
 import re
 import nltk
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 stopwords=set(stopwords.words('english'))
 
-class TextProccesing:
+class TextProcessing:
 
     #Function for removing emailids from text
     def remove_email(self,text):
@@ -22,3 +23,7 @@ class TextProccesing:
         else:
             pass
         return text
+
+    def remove_stopwards(self,text):
+        if text:
+            text.lower=text.lower()
