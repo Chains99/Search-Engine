@@ -37,6 +37,14 @@ a {
     color: #fff!important;
 }
 
+p{
+    text-transform: lowercase;
+}
+
+h4{
+    text-transform:lowercase;
+}
+
 p::first-letter{
     text-transform: uppercase;
 }
