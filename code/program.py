@@ -3,7 +3,11 @@ from lisa_parser import *
 from text_preprocessing import TextPreprocessing
 from vectorial_model import VectorialModel
 
-def run_program(query= None):
+
+def initialize():
+    
+    global docmts
+    global qries 
     #Cranfield Collection Paths
     PATH_CRAN_TXT = 'TestCollections\Cranfield\cran.all.1400'
     PATH_CRAN_QRY = 'TestCollections\Cranfield\cran.qry'
@@ -11,12 +15,12 @@ def run_program(query= None):
     #Get Cranfield's Documents
     cran_docs_data = CranfieldData(PATH_CRAN_TXT)
     cran_docs_atts = ['title', 'author', 'references', 'text']
-    cran_docs_dict = cran_docs_data.get_data(cran_docs_atts)
+    docmts = cran_docs_data.get_data(cran_docs_atts)
     
     #Get Cranfield's Queries
     cran_qries_data = CranfieldData(PATH_CRAN_QRY)
     cran_qry_atts = ['question']
-    cran_qries_dict = cran_qries_data.get_data(cran_qry_atts)
+    cran_qry_dict = cran_qries_data.get_data(cran_qry_atts)
 
     '''
     #Lisa Collection Paths
@@ -34,16 +38,19 @@ def run_program(query= None):
     lisa_qries_dict = lisa_qries_data.get_data(lisa_qry_atts)
     '''
 
-    all_docs = get_all_data(cran_docs_dict)
-    all_qries = get_all_data(cran_qries_dict)
-    vector_model = VectorialModel(all_docs)
+    all_docs = get_all_data(docmts)
+    qries = get_all_data(cran_qry_dict)
+    return VectorialModel(all_docs)
+    
+
+def run_program(model: VectorialModel, query= None):
     if query is None:
-        rank =  vector_model.query([all_qries[0]])
+        rank =  model.query([qries[0]])
     else:
-        rank =  vector_model.query([TextPreprocessing().preprocess_text(query)])
+        rank =  model.query([TextPreprocessing().preprocess_text(query)])
     rel_docs = []
     for docs in rank:
-        rel_docs.append(cran_docs_dict[docs[1]])
+        rel_docs.append(docmts[docs[1]])
     return rel_docs
 
 def get_all_data(data):

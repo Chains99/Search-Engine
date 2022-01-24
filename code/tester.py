@@ -1,3 +1,4 @@
 from program import *
 
-a = run_program()
+mod = initialize()
+a = run_program(mod)
