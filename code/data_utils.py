@@ -43,7 +43,8 @@ class DataUtils:
         for data in text:
             for term in data:
                 if is_qry:
-                    tf_idf[id, term] = (a + (1 - a)*tf_vals[id,term])*self.df_vals[term]
+                    df = self.df_vals[term] if term in self.vocabulary else 0
+                    tf_idf[id, term] = (a + (1 - a)*tf_vals[id,term])*df
                 
                 else:
                     tf_idf[id, term] = tf_vals[id, term]*self.df_vals[term]
@@ -82,7 +83,8 @@ class DataUtils:
         tf_idf_values = self.tf_idf(text, is_qry= is_query)
 
         for pair in tf_idf_values:
-            W[pair[0]][self.vocabulary.index(pair[1])] = tf_idf_values[pair]
+            if self.vocabulary.__contains__(pair[1]):
+                W[pair[0]][self.vocabulary.index(pair[1])] = tf_idf_values[pair]
 
         return W
     

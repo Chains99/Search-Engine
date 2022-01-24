@@ -40,7 +40,7 @@ def run_program(query= None):
     if query is None:
         rank =  vector_model.query([all_qries[0]])
     else:
-        rank =  vector_model.query(query)
+        rank =  vector_model.query([TextPreprocessing().preprocess_text(query)])
     rel_docs = []
     for docs in rank:
         rel_docs.append(cran_docs_dict[docs[1]])

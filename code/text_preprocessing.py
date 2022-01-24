@@ -84,6 +84,7 @@ class TextPreprocessing:
                 w3 = Word(w2).lemmatize("a")
                 lem.append(Word(w3).lemmatize())
             return lem
+            
     '''
     def lemmatize(self, text):
         if text:
