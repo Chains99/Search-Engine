@@ -14,6 +14,7 @@ class VectorialModel():
         self.vect_norm = []
         for ds in self.w_d:
             self.vect_norm.append(self.norm(ds))
+        a=0
 
     def dot(self, w1, w2):
         doct = 0
@@ -30,18 +31,19 @@ class VectorialModel():
             norm += component**2
         return math.sqrt(norm)
     
-    def query(self, text, k= 10):
+    def query(self, text, k= 20):
         
         w_q = self.doc_tools.weight(text,is_query= True)
         rank = []
         self.index = 0
+        self.qry_norm = self.norm(w_q[0])
         for ds in self.w_d:
             rank.append([self.cosine_sim(ds, w_q[0]), self.index])
             self.index += 1
 
         rank = sorted(rank, reverse= True)
-        return rank
+        return rank[: min(k, len(rank))]
 
     def cosine_sim(self, w1, w2):
-        cos_sim = self.dot(w1, w2)/self.vect_norm[self.index]*self.norm(w2)
+        cos_sim = self.dot(w1, w2)/self.vect_norm[self.index]*self.qry_norm
         return cos_sim
