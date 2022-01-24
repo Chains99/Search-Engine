@@ -5,10 +5,9 @@ import time
 from program import *
 
 
-app = Flask(__name__)
 initialize()
 print('Hola')
-
+app = Flask(__name__)
 
 
 @app.route("/")
@@ -22,4 +21,4 @@ def search_results():
     final=time.time()
     print(query)
     docs=run_program(query)
-    return render_template('search_results.html',query=query,time=final-inicio)
+    return render_template('search_results.html',query=query,time=final-inicio,docs=docs[:min(len(docs),20)])
