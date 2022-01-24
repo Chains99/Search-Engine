@@ -8,6 +8,7 @@ def initialize():
     
     global docmts
     global qries 
+    global model
     #Cranfield Collection Paths
     PATH_CRAN_TXT = 'TestCollections\Cranfield\cran.all.1400'
     PATH_CRAN_QRY = 'TestCollections\Cranfield\cran.qry'
@@ -40,10 +41,10 @@ def initialize():
 
     all_docs = get_all_data(docmts)
     qries = get_all_data(cran_qry_dict)
-    return VectorialModel(all_docs)
+    model =  VectorialModel(all_docs)
     
 
-def run_program(model: VectorialModel, query= None):
+def run_program(query= None):
     if query is None:
         rank =  model.query([qries[0]])
     else:
