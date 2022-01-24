@@ -52,7 +52,7 @@ class TextPreprocessing:
             return text.lower()
 
     def remove_punctuations(self, text):
-        return "".join(['' if x in string.punctuation else x for x in text])
+        return "".join([' ' if x in string.punctuation else x for x in text])
 
     #Function for removing emailids from text
     def remove_email(self,text):
@@ -72,8 +72,8 @@ class TextPreprocessing:
             text= word_tokenize(text)
             return " ".join(filter(lambda x: x not in stop_words, text))
 
-    #Funcion for lemmatize the text
     '''
+    #Funcion for lemmatize the text
     def lemmatize(self, text):
         if text:
             text= word_tokenize(text)
@@ -84,8 +84,9 @@ class TextPreprocessing:
                 w3 = Word(w2).lemmatize("a")
                 lem.append(Word(w3).lemmatize())
             return lem
-            
+    
     '''
+    
     def lemmatize(self, text):
         if text:
             text= word_tokenize(text)
@@ -104,8 +105,8 @@ class TextPreprocessing:
         return text
 
     def preprocess_text(self, text):
-        text = self.remove_punctuations(text)
         text = self.expand_contractions(text)
+        text = self.remove_punctuations(text)
         text = self.remove_stopwords(text)
         text = self.to_lower(text)
         text = self.clean_text(text)

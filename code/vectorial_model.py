@@ -18,10 +18,12 @@ class VectorialModel():
     def dot(self, w1, w2):
         doct = 0
         index = 0
+        count = True
         while index<self.vocabulary_len:
            doct += w1[index]*w2[index]
-           if doct != 0:
-               a = 9
+           if doct != 0 and count:
+               print(self.doc_id + 1)
+               count = False
            index+=1
         
         return doct
