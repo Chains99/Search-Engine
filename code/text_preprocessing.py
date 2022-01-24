@@ -1,16 +1,18 @@
 import re
 import nltk
+import string
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from nltk.stem.porter import PorterStemmer
 from nltk.tokenize import word_tokenize
+from textblob import Word
 stop_words=set(stopwords.words('english'))
 wordnet_lemmatizer = WordNetLemmatizer()
+porter_stemmer = PorterStemmer()
 
-class TextProcessing:
-
-    
-    def expand_contractions(self, text):
-        contractions_dict = { "ain't": "are not","'s":" is","aren't": "are not","can't": "can not","can't've": "cannot have",
+class TextPreprocessing:
+    def __init__(self):
+        self.contractions_dict = { "ain't": "are not","'s":" is","aren't": "are not","can't": "can not","can't've": "cannot have",
         "'cause": "because","could've": "could have","couldn't": "could not","couldn't've": "could not have",
         "didn't": "did not","doesn't": "does not","don't": "do not","hadn't": "had not","hadn't've": "had not have",
         "hasn't": "has not","haven't": "have not","he'd": "he would","he'd've": "he would have","he'll": "he will",
@@ -37,16 +39,20 @@ class TextProcessing:
         "you'd": "you would","you'd've": "you would have","you'll": "you will","you'll've": "you will have",
         "you're": "you are","you've": "you have"}
 
+    
+    def expand_contractions(self, text):
         # Regular expression for finding contractions
-        contractions_re = re.compile('(%s)' % '|'.join(contractions_dict.keys()))
-
+        contractions_re = re.compile('(%s)' % '|'.join(self.contractions_dict.keys()))
         def replace(match):
-            return contractions_dict[match.group(0)]
+            return self.contractions_dict[match.group(0)]
         return contractions_re.sub(replace, text)
 
     def to_lower(self,text):
         if text:
             return text.lower()
+
+    def remove_punctuations(self, text):
+        return "".join(['' if x in string.punctuation else x for x in text])
 
     #Function for removing emailids from text
     def remove_email(self,text):
@@ -55,7 +61,7 @@ class TextProcessing:
             return re.sub('([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})',' ',str(text))
 
     # Function for removing paper refrences from text e.g [19],[1a,2b] or [19,14,15]
-    def remove_refrence(self,text):
+    def remove_reference(self,text):
         if text:
             text= word_tokenize(text)
             return re.sub('\[\d+(,\s{0,}\d+){0,}\]','',str(text))   
@@ -67,16 +73,43 @@ class TextProcessing:
             return " ".join(filter(lambda x: x not in stop_words, text))
 
     #Funcion for lemmatize the text
+    
+    def lemmatize(self, text):
+        if text:
+            text= word_tokenize(text)
+            lem = []
+            for token in text:
+                w1 = Word(token).lemmatize("n")
+                w2 = Word(w1).lemmatize("v")
+                w3 = Word(w2).lemmatize("a")
+                lem.append(Word(w3).lemmatize())
+            return lem
+    '''
     def lemmatize(self, text):
         if text:
             text= word_tokenize(text)
             return " ".join([wordnet_lemmatizer.lemmatize(x) for x in text])
-
-
+    '''
+    def stemming(self, text):
+        if text:
+            text= word_tokenize(text)
+            return " ".join([porter_stemmer.stem(x) for x in text])
 
     def clean_text(self,text):
         text=re.sub('\w*\d\w*','', text)
         text=re.sub('\n',' ',text)
         text=re.sub(r"http\S+", "", text)
         text=re.sub('[^a-z]',' ',text)
+        return text
+
+    def preprocess_text(self, text):
+        text = self.remove_punctuations(text)
+        text = self.expand_contractions(text)
+        text = self.remove_stopwords(text)
+        text = self.to_lower(text)
+        text = self.clean_text(text)
+        #text = self.remove_reference(text)
+        #text = self.remove_email(text)
+        #text = self.stemming(text)
+        text = self.lemmatize(text)
         return text
