@@ -73,7 +73,7 @@ class TextPreprocessing:
             return " ".join(filter(lambda x: x not in stop_words, text))
 
     #Funcion for lemmatize the text
-    
+    '''
     def lemmatize(self, text):
         if text:
             text= word_tokenize(text)
@@ -90,7 +90,7 @@ class TextPreprocessing:
         if text:
             text= word_tokenize(text)
             return " ".join([wordnet_lemmatizer.lemmatize(x) for x in text])
-    '''
+
     def stemming(self, text):
         if text:
             text= word_tokenize(text)
