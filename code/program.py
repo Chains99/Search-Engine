@@ -5,7 +5,7 @@ from vectorial_model import VectorialModel
 
 
 def initialize():
-    
+
     global docmts
     global qries 
     global model
