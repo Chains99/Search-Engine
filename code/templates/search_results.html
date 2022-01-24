@@ -42,7 +42,7 @@
                                     <div class="col-md-12">
                                         {% for doc in docs %}
                                         <div class="search-item">
-                                            <h4 class="mb-1"><a href="#">{{doc['title']}}</a></h4>
+                                            <h4 class="mb-1"><a href="{{url_for ('doc',index=docs.index(doc)) }}">{{doc['title']}}</a></h4>
                                             <div class="font-13 text-success mb-3">https://www.bootdey.com</div>
                                             <p class="mb-0 text-muted">{{doc['text'][:400]}}</p>
                                         </div>
