@@ -3,7 +3,7 @@ from collections import Counter
 import numpy as np
 import math
 
-a = 0.5
+a = 0.4
 
 class DataUtils:
     def __init__(self, data):
@@ -13,6 +13,7 @@ class DataUtils:
         self.vocabulary = self.get_vocabulary()
         self.vocab_len = len(self.vocabulary)
         self.df_vals = self.df()
+        
 
     def term_occurrence(self, text):
         freq = {}

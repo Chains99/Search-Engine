@@ -9,6 +9,7 @@ def initialize():
     global docmts
     global qries 
     global model
+    '''
     #Cranfield Collection Paths
     PATH_CRAN_TXT = 'TestCollections\Cranfield\cran.all.1400'
     PATH_CRAN_QRY = 'TestCollections\Cranfield\cran.qry'
@@ -24,6 +25,7 @@ def initialize():
     cran_qry_dict = cran_qries_data.get_data(cran_qry_atts)
 
     '''
+    
     #Lisa Collection Paths
     PATH_LISA = 'TestCollections\Lisa\LISA DOCS'
     PATH_LISA_QRY = 'TestCollections\Lisa\LISA.QUE'
@@ -31,16 +33,17 @@ def initialize():
     #Get Lisa's Documents
     lisa_docs_data = LisaData(PATH_LISA)
     lisa_docs_atts = ['title', 'text']
-    lisa_docs_dict = lisa_docs_data.get_data(lisa_docs_atts)
+    docmts = lisa_docs_data.get_data(lisa_docs_atts)
 
     #Get Lisa's Queries
     lisa_qries_data = LisaData(PATH_LISA_QRY)
     lisa_qry_atts = ['question']
-    lisa_qries_dict = lisa_qries_data.get_data(lisa_qry_atts)
-    '''
+    lisa_qry_dict = lisa_qries_data.get_data(lisa_qry_atts)
+
 
     all_docs = get_all_data(docmts)
-    qries = get_all_data(cran_qry_dict)
+    qries = get_all_data(lisa_qry_dict)
+    
     model =  VectorialModel(all_docs)
     
 
@@ -54,7 +57,7 @@ def run_program(query= None):
         rank =  model.query(prep_qry)
     rel_docs = []
     for docs in rank:
-        rel_docs.append(docmts[docs[1]+1])
+        rel_docs.append(docmts[docs[1] + 1])
     return rel_docs
 
 def get_all_data(data):

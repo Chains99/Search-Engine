@@ -105,10 +105,10 @@ class TextPreprocessing:
         return text
 
     def preprocess_text(self, text):
+        text = self.to_lower(text)
         text = self.expand_contractions(text)
         text = self.remove_punctuations(text)
         text = self.remove_stopwords(text)
-        text = self.to_lower(text)
         text = self.clean_text(text)
         #text = self.remove_reference(text)
         #text = self.remove_email(text)

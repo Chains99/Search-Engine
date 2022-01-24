@@ -3,6 +3,8 @@ import pandas as pd
 import re
 from collections import defaultdict
 
+from validators.length import length
+
 
 class LisaData:
     doc_strip_pattern = re.compile('\n?Document {1,2}')
@@ -28,13 +30,14 @@ class LisaData:
             id = int(doc_splted[0].strip())
             index = 1
             if pattern is not None:
-                doc_splted = re.split(pattern, doc_splted[1])
+                doc_splted = re.split(pattern, doc_splted[1], maxsplit= 1)
                 index = 0
 
             for atts in attributes:
                 data_dict[id][atts] = doc_splted[index].strip()
                 index += 1
-            data_dict[id]['descp'] = min(400, len(data_dict[id]['text']))
+            if attributes.__contains__('text'):
+                data_dict[id]['descp'] = min(400, len(data_dict[id]['text']))
     
     def get_data(self, attributes):
         if len(attributes) == 1:
@@ -50,6 +53,7 @@ class LisaData:
             self.path = self.file_path + '/' + filename
             data = self.read_data(self.doc_strip_pattern)
             self.lisa_data_splitter(data, self.lisa_txt_patterns, lisa_docs_list, attributes)
+            
         return lisa_docs_list
 
 

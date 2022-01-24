@@ -1,3 +1,4 @@
+from nltk.util import print_string
 import numpy as np
 from validators import length
 from vector import Vector
@@ -13,7 +14,6 @@ class VectorialModel():
         self.vect_norm = []
         for ds in self.w_d:
             self.vect_norm.append(self.norm(ds))
-        
 
     def dot(self, w1, w2):
         doct = 0
@@ -34,14 +34,14 @@ class VectorialModel():
         
         w_q = self.doc_tools.weight(text,is_query= True)
         rank = []
-        self.doc_id = 0
+        self.index = 0
         for ds in self.w_d:
-            rank.append([self.cosine_sim(ds, w_q[0]), self.doc_id])
-            self.doc_id += 1
+            rank.append([self.cosine_sim(ds, w_q[0]), self.index])
+            self.index += 1
 
         rank = sorted(rank, reverse= True)
         return rank
 
     def cosine_sim(self, w1, w2):
-        cos_sim = self.dot(w1, w2)/self.vect_norm[self.doc_id]*self.norm(w2)
+        cos_sim = self.dot(w1, w2)/self.vect_norm[self.index]*self.norm(w2)
         return cos_sim
