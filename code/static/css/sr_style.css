@@ -36,3 +36,10 @@ a {
 .btn-custom, .btn-danger, .btn-info, .btn-inverse, .btn-pink, .btn-primary, .btn-purple, .btn-success, .btn-warning {
     color: #fff!important;
 }
+
+p::first-letter{
+    text-transform: uppercase;
+}
+h4::first-letter{
+    text-transform: uppercase;
+}
