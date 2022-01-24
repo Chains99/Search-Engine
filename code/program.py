@@ -25,7 +25,6 @@ def initialize():
     cran_qry_dict = cran_qries_data.get_data(cran_qry_atts)
 
     '''
-    
     #Lisa Collection Paths
     PATH_LISA = 'TestCollections\Lisa\LISA DOCS'
     PATH_LISA_QRY = 'TestCollections\Lisa\LISA.QUE'
@@ -39,7 +38,8 @@ def initialize():
     lisa_qries_data = LisaData(PATH_LISA_QRY)
     lisa_qry_atts = ['question']
     lisa_qry_dict = lisa_qries_data.get_data(lisa_qry_atts)
-'''
+
+    '''
 
     all_docs = get_all_data(docmts)
     qries = get_all_data(cran_qry_dict)
@@ -58,8 +58,6 @@ def run_program(query= None):
         rank =  model.query(prep_qry)
     rel_docs = []
     for docs in rank:
-        if docs[0] == 0.0:
-            break
         rel_docs.append(docmts[docs[1] + 1])
     return rel_docs
 

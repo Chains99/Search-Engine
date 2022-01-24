@@ -35,14 +35,22 @@ class VectorialModel():
             norm += component**2
         return math.sqrt(norm)
     
+    def doc_contain_query(self, doc_id ,query):
+        for q in query[1]:
+            if self.docs[doc_id + 1].__contains__(q):
+                return True
+        return False
+
     def query(self, text, k= 20):
         
         w_q = self.doc_tools.weight(text,is_query= True)
         rank = []
         self.index = 0
         self.qry_norm = self.norm(w_q[0])
+
         for ds in self.w_d:
-            rank.append([self.cosine_sim(ds, w_q[0]), self.index])
+            if self.doc_contain_query(self.index, text):
+                rank.append([self.cosine_sim(ds, w_q[0]), self.index])
             self.index += 1
 
         rank = sorted(rank, reverse= True)
