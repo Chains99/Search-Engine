@@ -48,22 +48,27 @@ def run_program(query= None):
     if query is None:
         rank =  model.query([qries[0]])
     else:
-        rank =  model.query([TextPreprocessing().preprocess_text(query)])
+        prep_qry = {}
+        prep_qry[1] = TextPreprocessing().preprocess_text(query)
+        rank =  model.query(prep_qry)
     rel_docs = []
     for docs in rank:
-        rel_docs.append(docmts[docs[1]])
+        rel_docs.append(docmts[docs[1]+1])
     return rel_docs
 
 def get_all_data(data):
-    all_data = list()
+    all_data = {}
     preprocess = TextPreprocessing()
     for doc in data:
         docmt = ''
         for elemnt in data[doc]:
             if elemnt != 'descp':
                 docmt += data[doc][elemnt]
-        if docmt != '':
-            all_data.append(preprocess.preprocess_text(docmt))
+        if str.isspace(docmt):
+            all_data[doc] = docmt.strip()
+        else:
+            all_data[doc] = preprocess.preprocess_text(docmt)
+            
     return all_data
 
 

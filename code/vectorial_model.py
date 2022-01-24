@@ -20,6 +20,8 @@ class VectorialModel():
         index = 0
         while index<self.vocabulary_len:
            doct += w1[index]*w2[index]
+           if doct != 0:
+               a = 9
            index+=1
         
         return doct

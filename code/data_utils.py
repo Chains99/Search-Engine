@@ -18,7 +18,7 @@ class DataUtils:
         freq = {}
         id = 1
         for data in text:
-            for term in data:
+            for term in text[data]:
                 try:
                     freq[term].add(id)
                 except:
@@ -39,9 +39,9 @@ class DataUtils:
     def tf_idf(self, text, is_qry):
         tf_vals = self.tf(text)
         tf_idf = {}
-        id = 0
+        id = 1
         for data in text:
-            for term in data:
+            for term in text[data]:
                 if is_qry:
                     df = self.df_vals[term] if term in self.vocabulary else 0
                     tf_idf[id, term] = (a + (1 - a)*tf_vals[id,term])*df
@@ -55,11 +55,14 @@ class DataUtils:
 
     def tf(self, text):
         tf_vals = {}
-        id = 0
+        id = 1
         for data in text:
-            counter = Counter(data)
+            counter = Counter(text[data])
+            if len(counter) == 0:
+                id+=1
+                continue
             max_freq = max(counter.values())
-            for term in counter.keys():
+            for term in text[data]:
                 tf = counter[term]/max_freq
                 tf_vals[id, term] = tf
 
@@ -70,10 +73,9 @@ class DataUtils:
     def df(self):
         ocrns = self.terms_occurrences
         df_vals = {}
-        for data in self.data:
-            for term in data:
-                df = np.log(self.data_len/ocrns[term])
-                df_vals[term] = df
+        for term in self.vocabulary:
+            df = np.log(self.data_len/ocrns[term])
+            df_vals[term] = df
         
         return df_vals
 
@@ -83,8 +85,7 @@ class DataUtils:
         tf_idf_values = self.tf_idf(text, is_qry= is_query)
 
         for pair in tf_idf_values:
-            if self.vocabulary.__contains__(pair[1]):
-                W[pair[0]][self.vocabulary.index(pair[1])] = tf_idf_values[pair]
+            W[pair[0]-1][self.vocabulary.index(pair[1])] = tf_idf_values[pair]
 
         return W
     
