@@ -4,7 +4,6 @@ from text_preprocessing import TextPreprocessing
 from vectorial_model import VectorialModel
 
 
-
 def initialize():
 
     global docmts
