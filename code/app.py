@@ -3,6 +3,7 @@ from pydoc import doc
 from flask import Flask,render_template, request
 import time
 from program import *
+
 initialize()
 print('Hola')
 app = Flask(__name__)
@@ -17,12 +18,11 @@ def search_results():
     global docs
     query=request.args.get('query')
     inicio=time.time()
-    final=time.time()
-    print(query)
     docs=run_program(query)
+    final=time.time()
     len_=len(docs)
     min_len=min(len(docs),20)
-    return render_template('search_results.html',query=query,time=final-inicio,docs=docs[:min_len],len=len_)
+    return render_template('search_results.html',query=query,time=str(final-inicio)[:4],docs=docs[:min_len],len=len_)
 
 @app.route("/doc/<int:index>")
 def doc(index):
