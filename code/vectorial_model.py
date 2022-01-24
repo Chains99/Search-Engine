@@ -15,7 +15,6 @@ class VectorialModel():
             self.vect_norm.append(self.norm(ds))
         
 
-
     def dot(self, w1, w2):
         doct = 0
         index = 0

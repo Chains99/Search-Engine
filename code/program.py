@@ -3,7 +3,7 @@ from lisa_parser import *
 from text_preprocessing import TextPreprocessing
 from vectorial_model import VectorialModel
 
-def run_program():
+def run_program(query= None):
     #Cranfield Collection Paths
     PATH_CRAN_TXT = 'TestCollections\Cranfield\cran.all.1400'
     PATH_CRAN_QRY = 'TestCollections\Cranfield\cran.qry'
@@ -37,12 +37,15 @@ def run_program():
     all_docs = get_all_data(cran_docs_dict)
     all_qries = get_all_data(cran_qries_dict)
     vector_model = VectorialModel(all_docs)
-    rank =  vector_model.query([all_qries[0]])
+    if query is None:
+        rank =  vector_model.query([all_qries[0]])
+    else:
+        rank =  vector_model.query(query)
     rel_docs = []
     for docs in rank:
         rel_docs.append(cran_docs_dict[docs[1]])
     return rel_docs
-    
+
 def get_all_data(data):
     all_data = list()
     preprocess = TextPreprocessing()
