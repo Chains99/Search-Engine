@@ -60,7 +60,8 @@ def get_all_data(data):
     for doc in data:
         docmt = ''
         for elemnt in data[doc]:
-            docmt += data[doc][elemnt]
+            if elemnt != 'descp':
+                docmt += data[doc][elemnt]
         if docmt != '':
             all_data.append(preprocess.preprocess_text(docmt))
     return all_data
