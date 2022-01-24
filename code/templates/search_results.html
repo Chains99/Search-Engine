@@ -19,12 +19,14 @@
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
                                 <div class="pt-3 pb-4">
-                                    <div class="input-group">
-                                        <input type="text" id="" name="" class="form-control" value="{{query}}">
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn waves-effect waves-light btn-custom"><i class="fa fa-search mr-1"></i> Search</button>
+                                    <form action="/search_results">
+                                        <div class="input-group">
+                                            <input type="search" id=""  class="form-control" value="{{query}}" name="query" pattern=".*\S.*" required>
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-info btn-custom"><i class="fa fa-search mr-1"></i> Search</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     <div class="mt-4 text-center">
                                         <h4>Search Results For "{{query}}"</h4></div>
                                 </div>
@@ -71,7 +73,7 @@
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" height="48" alt="image"> 
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png" height="48" alt="image"> 
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar4.png" height="48" alt="image">
-                                            </div>
+                                            </div>  
                                         </div>
                                         <div class="search-item">
                                             <h4 class="mb-1"><a href="#">Zircos - Responsive Admin Template</a></h4>

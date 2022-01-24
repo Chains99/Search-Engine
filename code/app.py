@@ -1,6 +1,8 @@
 from glob import escape
 from pydoc import doc
 from flask import Flask,render_template, request
+import time
+from program import run_program
 
 app = Flask(__name__)
 
@@ -10,10 +12,11 @@ def search():
 
 @app.route("/search_results")
 def search_results():
-    docs={
-
-    }
-    
     query=request.args.get('query')
-    amor='asd'
-    return render_template('search_results.html',query=query,amor=amor)
+
+    inicio=time.time()
+    final=time.time()
+    docs=run_program(query)
+
+
+    return render_template('search_results.html',query=query,time=final-inicio,docs=docs[:10])
