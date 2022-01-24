@@ -50,7 +50,7 @@ def run_program(query= None):
         prep_qry[1] = qries[1]
         rank =  model.query(prep_qry)
     else:
-        prep_qry[1] = [TextPreprocessing().preprocess_text(query)]
+        prep_qry[1] = TextPreprocessing().preprocess_text(query).split(' ')
         rank =  model.query(prep_qry)
     rel_docs = []
     for docs in rank:
@@ -68,8 +68,6 @@ def get_all_data(data):
         if str.isspace(docmt):
             all_data[doc] = docmt.strip()
         else:
-            if doc == 20:
-                a = 0
             all_data[doc] = preprocess.preprocess_text(docmt).split(' ')
             
     return all_data
