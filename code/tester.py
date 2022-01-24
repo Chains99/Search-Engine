@@ -2,4 +2,4 @@ from program import *
 import time
 
 initialize()
-a = run_program()
+a = run_program('love')

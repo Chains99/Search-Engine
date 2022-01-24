@@ -1,9 +1,9 @@
 import math
-from collections import Counter
+from collections import Counter, defaultdict
 import numpy as np
 import math
 
-a = 0.4
+a = 0.5
 
 class DataUtils:
     def __init__(self, data):
@@ -85,10 +85,11 @@ class DataUtils:
 
     def weight(self, text, is_query= False):
         W = np.zeros((len(text), self.vocab_len))
+        #W = defaultdict(dict)
         tf_idf_values = self.tf_idf(text, is_qry= is_query)
 
         for pair in tf_idf_values:
             W[pair[0]-1][self.vocabulary.index(pair[1])] = tf_idf_values[pair]
-
+            #W[pair[0] - 1][pair[1]] = tf_idf_values[pair]
         return W
     

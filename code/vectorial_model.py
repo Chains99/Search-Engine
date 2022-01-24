@@ -14,7 +14,11 @@ class VectorialModel():
         self.vect_norm = []
         for ds in self.w_d:
             self.vect_norm.append(self.norm(ds))
-        a=0
+        
+        
+    def get_wd(self):
+        for doc in self.docs:
+            self.doc_tools.weight(doc)
 
     def dot(self, w1, w2):
         doct = 0
@@ -45,5 +49,5 @@ class VectorialModel():
         return rank[: min(k, len(rank))]
 
     def cosine_sim(self, w1, w2):
-        cos_sim = self.dot(w1, w2)/self.vect_norm[self.index]*self.qry_norm
+        cos_sim = self.dot(w1, w2)/(self.vect_norm[self.index]*self.qry_norm)
         return cos_sim
