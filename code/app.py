@@ -3,10 +3,7 @@ from pydoc import doc
 from flask import Flask,render_template, request
 import time
 from program import *
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 initialize()
 print('Hola')
