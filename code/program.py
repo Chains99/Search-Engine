@@ -45,6 +45,7 @@ def initialize():
     qries = get_all_data(lisa_qry_dict)
     
     model =  VectorialModel(all_docs)
+    print('Finished initilize')
     
 
 def run_program(query= None):

@@ -5,7 +5,7 @@ import time
 from program import *
 
 initialize()
-print('Hola')
+
 app = Flask(__name__)
 
 
