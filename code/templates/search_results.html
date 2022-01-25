@@ -43,7 +43,10 @@
                                         {% for doc in docs %}
                                         <div class="search-item">
                                             <h4 class="mb-1"><a href="{{url_for ('doc',index=docs.index(doc)) }}">{{doc[1]['title']}}</a></h4>
-                                            <div class="font-13 text-success mb-3">{% if  doc[1]['author'] %}Author: {{doc[1]['author']}}{%endif%} Id: {{doc[0]}}</div>
+                                            {% if  doc[1]['author'] %}
+                                            <div class="font-13 text-success mb-1">Author: {{doc[1]['author']}}</div>
+                                            {%endif%}
+                                            <div class="font-13 text-success mb-1">ID: {{doc[0]}}</div>
                                             <p class="mb-0 text-muted">{{doc[1]['text'][:400]}}...</p>
                                         </div>
                                         {%endfor%}
