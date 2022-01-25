@@ -27,8 +27,6 @@ class CranfieldData:
             for atts in attributes:
                 data_dict[id][atts] = splted[index]
                 index += 1
-            if attributes.__contains__('text'):
-                data_dict[id]['descp'] = min(400, len(data_dict[id]['text']))
 
 
     def get_data(self, attributes):

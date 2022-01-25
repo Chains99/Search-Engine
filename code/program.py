@@ -38,8 +38,8 @@ def initialize():
     lisa_qries_data = LisaData(PATH_LISA_QRY)
     lisa_qry_atts = ['question']
     lisa_qry_dict = lisa_qries_data.get_data(lisa_qry_atts)
-
     '''
+    
 
     all_docs = get_all_data(docmts)
     qries = get_all_data(cran_qry_dict)
@@ -58,7 +58,8 @@ def run_program(query= None):
         rank =  model.query(prep_qry)
     rel_docs = []
     for docs in rank:
-        rel_docs.append(docmts[docs[1] + 1])
+        id = docs[1] + 1
+        rel_docs.append([id, docmts[id]])
     return rel_docs
 
 def get_all_data(data):
@@ -67,8 +68,7 @@ def get_all_data(data):
     for doc in data:
         docmt = ''
         for elemnt in data[doc]:
-            if elemnt != 'descp':
-                docmt += data[doc][elemnt]
+            docmt += data[doc][elemnt]
         if str.isspace(docmt):
             all_data[doc] = docmt.strip()
         else:

@@ -19,7 +19,10 @@ class VectorialModel():
     def get_wd(self):
         for doc in self.docs:
             self.doc_tools.weight(doc)
-
+    
+    def dot(self, w1, w2):
+        return w1@w2
+    '''
     def dot(self, w1, w2):
         doct = 0
         index = 0
@@ -28,13 +31,16 @@ class VectorialModel():
            index+=1
         
         return doct
-
+    '''
+    def norm(self, w):
+        return np.linalg.norm(w)
+    '''
     def norm(self, w):
         norm = 0
         for component in w:
             norm += component**2
         return math.sqrt(norm)
-    
+    '''
     def doc_contain_query(self, doc_id ,query):
         for q in query[1]:
             if self.docs[doc_id + 1].__contains__(q):
@@ -54,7 +60,7 @@ class VectorialModel():
             self.index += 1
 
         rank = sorted(rank, reverse= True)
-        return rank[: min(k, len(rank))]
+        return rank
 
     def cosine_sim(self, w1, w2):
         cos_sim = self.dot(w1, w2)/(self.vect_norm[self.index]*self.qry_norm)
