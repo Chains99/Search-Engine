@@ -21,14 +21,15 @@ def initialize():
     cran_docs_data = CranfieldData(PATH_CRAN_TXT)
     cran_docs_atts = ['title', 'author', 'references', 'text']
     docmts = cran_docs_data.get_data(cran_docs_atts)
+<<<<<<< HEAD
     qrel = cran_docs_data.read_rel_doc(PATH_CRAN_REL)
-
-    
+=======
+    '''
+>>>>>>> be652cb407c77c494d61d2af5ad02ff1daf1fd8a
     #Get Cranfield's Queries
     cran_qries_data = CranfieldData(PATH_CRAN_QRY)
     cran_qry_atts = ['question']
     cran_qry_dict = cran_qries_data.get_data(cran_qry_atts)
-    
     '''
     
     #Lisa Collection Paths
@@ -44,10 +45,11 @@ def initialize():
     lisa_qries_data = LisaData(PATH_LISA_QRY)
     lisa_qry_atts = ['question']
     lisa_qry_dict = lisa_qries_data.get_data(lisa_qry_atts)
+    
     '''
 
     all_docs = get_all_data(docmts)
-    qries = get_all_data(cran_qry_dict)
+    qries = get_all_data(lisa_qry_dict)
     
     model =  VectorialModel(all_docs)
     metcs = metrics(qries)
