@@ -14,7 +14,7 @@ def initialize():
     global model
     global qrel
 
-
+    '''
     #Cranfield Collection Paths
     PATH_CRAN_TXT = 'TestCollections\Cranfield\cran.all.1400'
     PATH_CRAN_QRY = 'TestCollections\Cranfield\cran.qry'
@@ -30,8 +30,8 @@ def initialize():
     cran_qries_data = CranfieldData(PATH_CRAN_QRY)
     cran_qry_atts = ['question']
     cran_qry_dict = cran_qries_data.get_data(cran_qry_atts)
-
     '''
+    
     #Lisa Collection Paths
     PATH_LISA = 'TestCollections\Lisa\LISA DOCS'
     PATH_LISA_QRY = 'TestCollections\Lisa\LISA.QUE'
@@ -46,15 +46,16 @@ def initialize():
     lisa_qry_atts = ['question']
     lisa_qry_dict = lisa_qries_data.get_data(lisa_qry_atts)
     
-    '''
+    
 
     all_docs = get_all_data(docmts)
-    qries = get_all_data(cran_qry_dict)
+    qries = get_all_data(lisa_qry_dict)
     model =  VectorialModel(all_docs)
+    '''
     metcs = metrics(qries)
     for p in metcs:
         print(metcs[p])
-
+    '''
     
 
 def run_program(query= None):
