@@ -54,6 +54,25 @@ class LisaData:
             
         return lisa_docs_list
 
+    def read_rel_doc(self, path):
+        rel_docs = {}
+        with open(path, 'r') as f:
+            rl = f.read().split('\n\n')
+            rel  = []
+            index = 0
+            for line in rl:
+                spltd = line.split('\n')
+                for s in spltd:
+                    s1 = spltd[0].split(' ')
+                    id = int(s1[1])
+                    elem = spltd[2].split(' ')
+                    for e in elem:
+                        if int(e) == -1:
+                            continue
+                        rel.append(int(e))
+                    rel_docs[index] = rel
+                    rel = []
+                    index+=1
 
 
 
