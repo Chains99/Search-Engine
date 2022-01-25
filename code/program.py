@@ -30,17 +30,18 @@ def initialize():
     cran_qries_data = CranfieldData(PATH_CRAN_QRY)
     cran_qry_atts = ['question']
     cran_qry_dict = cran_qries_data.get_data(cran_qry_atts)
-    '''
     
+    '''
     #Lisa Collection Paths
     PATH_LISA = 'TestCollections\Lisa\LISA DOCS'
     PATH_LISA_QRY = 'TestCollections\Lisa\LISA.QUE'
+    PATH_LISA_REL = 'TestCollections\Lisa\LISA.REL'
 
     #Get Lisa's Documents
     lisa_docs_data = LisaData(PATH_LISA)
     lisa_docs_atts = ['title', 'text']
     docmts = lisa_docs_data.get_data(lisa_docs_atts)
-
+    qrel = lisa_docs_data.read_rel_doc(PATH_LISA_REL)
     #Get Lisa's Queries
     lisa_qries_data = LisaData(PATH_LISA_QRY)
     lisa_qry_atts = ['question']
@@ -51,7 +52,7 @@ def initialize():
     all_docs = get_all_data(docmts)
     qries = get_all_data(cran_qry_dict)
     model =  VectorialModel(all_docs)
-
+    
     metcs = metrics(qries)
     for p in metcs:
         print(metcs[p])
