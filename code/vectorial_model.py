@@ -45,7 +45,7 @@ class VectorialModel():
             self.index += 1
 
         rank = sorted(rank, reverse= True)
-        return rank[: min(k, len(rank))]
+        return rank
 
     def cosine_sim(self, w1, w2):
         cos_sim = self.dot(w1, w2)/(self.vect_norm[self.index]*self.qry_norm)
