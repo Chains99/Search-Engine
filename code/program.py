@@ -102,7 +102,7 @@ def metrics(queries):
         set2 = set(qrel[ind_qrel])
         inters = set1 & set2 
         total_inter = len(inters)
-        prec = total_inter/len(rel) #precision
+        prec = total_inter/len(rel[1]) #precision
         recall = total_inter/len(qrel[ind_qrel])  #recall
         F1 = (2*prec*recall)/(1 if prec + recall == 0 else prec + recall)  #f-score
         metrics[ind_qrel] = [prec,recall,F1]
