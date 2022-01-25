@@ -12,6 +12,28 @@ class CranfieldData:
     def __init__(self, path):
         self.path = path
 
+    def read_rel_doc(self, path):
+        rel_docs = {}
+        with open(path, 'r') as f:
+            rl = f.readlines()
+            rel  = []
+            index = 1
+            for line in rl:
+                spltd = line.split(' ')
+                id = int(spltd[0])
+                if id == 225:
+                    a = 0
+                if index != id:
+                    rel_docs[id-1] = rel
+                    index+=1
+                    rel = []
+                    
+                rel.append(int(spltd[1]))
+        rel_docs[len(rel_docs) + 1] = rel 
+        return rel_docs
+
+
+
     def read_data(self, sep):
         with open(self.path, 'r') as f:
             txt = f.read().replace('\n', " ")
