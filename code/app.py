@@ -27,4 +27,4 @@ def search_results():
 
 @app.route("/doc/<int:index>")
 def doc(index):
-    return render_template('doc.html',doc=docs[index])
+    return render_template('doc.html',doc=docs[index][1])
