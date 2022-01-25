@@ -18,9 +18,10 @@ def search_results():
     global docs
     query=request.args.get('query')
     inicio=time.time()
-    docs=run_program(query)
+    docs_len=run_program(query)
     final=time.time()
-    len_=len(docs)
+    len_=docs_len[0]
+    docs=docs_len[1]
     min_len=min(len(docs),20)
     return render_template('search_results.html',query=query,time=str(final-inicio)[:4],docs=docs[:min_len],len=len_)
 
