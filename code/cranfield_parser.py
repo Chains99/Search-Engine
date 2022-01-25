@@ -21,8 +21,6 @@ class CranfieldData:
             for line in rl:
                 spltd = line.split(' ')
                 id = int(spltd[0])
-                if id == 225:
-                    a = 0
                 if index != id:
                     rel_docs[id-1] = rel
                     index+=1
