@@ -89,7 +89,7 @@ def get_all_data(data):
             
     return all_data
 
-
+'''
 def metrics(queries):
     metrics = {}
     ind_qrel = 1
@@ -110,3 +110,4 @@ def metrics(queries):
         ind_qrel+=1
 
     return metrics
+    '''

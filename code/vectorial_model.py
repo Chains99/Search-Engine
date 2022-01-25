@@ -1,7 +1,6 @@
 from nltk.util import print_string
 import numpy as np
 from validators import length
-from vector import Vector
 from data_utils import DataUtils
 from text_preprocessing import TextPreprocessing
 import math
