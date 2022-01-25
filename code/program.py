@@ -96,7 +96,7 @@ def metrics(queries):
     for id in queries:
         rel =  run_program(" ".join(queries[id]))
         docs = []
-        for index in rel:
+        for index in rel[1]:
             docs.append(index[0])
         set1 = set(docs)
         set2 = set(qrel[ind_qrel])
